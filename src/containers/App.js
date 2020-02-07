@@ -8,15 +8,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      robots: [],
+      rickAndMortyChars: [],
       searchInput: ''
     }
   }
 
   componentDidMount() {
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://rickandmortyapi.com/api/character/')
       .then(response => response.json())
-      .then(users => this.setState({robots: users}));
+      .then(chars => {
+        const charsArray = chars.results;
+        console.log('status', charsArray[0].status);
+        this.setState({rickAndMortyChars: charsArray})
+      });
   }
 
   onInputChange = (event) => {
@@ -24,16 +28,17 @@ class App extends Component {
   };
 
   render() {
-    const { robots, searchInput } = this.state;
-    const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(searchInput.toLowerCase()));
-    return !robots.length
+    const { rickAndMortyChars, searchInput } = this.state;
+    const filteredRickAndMortyChars = rickAndMortyChars.filter(char => char.name.toLowerCase().includes(searchInput.toLowerCase()));
+    return !rickAndMortyChars.length
       ? <h1>Loading</h1>
       : <div className='tc'>
-          <p className='f1'>ROBOFRIENDS</p>
+          <p className='f1'>Rick And Morty</p>
           <SearchBox onInputChange={this.onInputChange}/>
           <Scroll>
-            {filteredRobots.map(robot => {
-              return <Card id={robot.id} name={robot.name} email={robot.email}/>
+            {filteredRickAndMortyChars.map(char => {
+              return <Card id={char.id} name={char.name} species={char.species}
+                           gender={char.gender} status={char.status}/>
             })}
           </Scroll>
         </div>
