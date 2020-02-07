@@ -31,7 +31,7 @@ class App extends Component {
     const { rickAndMortyChars, searchInput } = this.state;
     const filteredRickAndMortyChars = rickAndMortyChars.filter(char => char.name.toLowerCase().includes(searchInput.toLowerCase()));
     return !rickAndMortyChars.length
-      ? <h1>Loading</h1>
+      ? <h1 className='loading'>Loading</h1>
       : <div className='tc'>
           <p className='f1'>Rick And Morty</p>
           <SearchBox onInputChange={this.onInputChange}/>
