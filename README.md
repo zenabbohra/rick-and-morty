@@ -1,5 +1,5 @@
 # Rick And Morty
-A simple web app for Rick and Morty fans that lets them search for their favourite character from the show
+A simple [web app for Rick and Morty fans](https://zenabbohra.github.io/rick-and-morty/) that lets them search for their favourite character from the show
 
 ![](rick-and-morty.gif)
 
