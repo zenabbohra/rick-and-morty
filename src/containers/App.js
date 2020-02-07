@@ -14,13 +14,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('https://rickandmortyapi.com/api/character/')
-      .then(response => response.json())
-      .then(chars => {
-        const charsArray = chars.results;
-        console.log('status', charsArray[0].status);
-        this.setState({rickAndMortyChars: charsArray})
-      });
+    const pages = [1,2,3,4,5];
+    const promiseArray = [];
+    pages.map(page => {
+      const responsePromise = fetch(`https://rickandmortyapi.com/api/character/?page=${page}`)
+        .then(response => response.json())
+        .then(chars => chars.results);
+      promiseArray.push(responsePromise);
+      return promiseArray
+    });
+
+    Promise.all(promiseArray)
+      .then((resultArray) => resultArray.flat())
+      .then((flattenedResultArray) => this.setState({rickAndMortyChars: flattenedResultArray} ));
   }
 
   onInputChange = (event) => {
@@ -36,8 +42,8 @@ class App extends Component {
           <p className='f1'>Rick And Morty</p>
           <SearchBox onInputChange={this.onInputChange}/>
           <Scroll>
-            {filteredRickAndMortyChars.map(char => {
-              return <Card id={char.id} name={char.name} species={char.species}
+            {filteredRickAndMortyChars.map((char,i) => {
+              return <Card key={i} id={char.id} name={char.name} species={char.species}
                            gender={char.gender} status={char.status}/>
             })}
           </Scroll>

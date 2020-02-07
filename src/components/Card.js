@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Card = ({ id, name, species, gender, status }) => {
-  console.log(status);
   return(
     <div className='ba bw2 br2 ma2 dib bg-light-yellow b--light-yellow shadow-5'>
       <img
