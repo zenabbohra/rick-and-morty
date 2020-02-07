@@ -1,3 +1,8 @@
+# Rick And Morty
+A simple web app for Rick and Morty fans that lets them search for their favourite character from the show
+
+![](rick-and-morty.gif)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
